@@ -5,7 +5,7 @@ import { API_URL } from "../../utilities/constants";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
 	const cityName = req.query.city;
-	return new Promise((resolve, rejected) =>
+	return new Promise((resolve) =>
 		axios
 			.get(`${API_URL}&q=${cityName}`)
 			.then((response) => {
