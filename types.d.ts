@@ -42,6 +42,7 @@ export interface IWeatherData {
 	cod: number;
 }
 
+export type Loading = number;
 export interface IState {
-	weatherData: { data: IWeatherData };
+	weatherData: { data: IWeatherData; loading: Loading; error: Error };
 }

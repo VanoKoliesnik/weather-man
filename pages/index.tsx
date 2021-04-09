@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Head from "next/head";
-import { fetchWeatherByCity } from "../actions/weather-actions";
+import { fetchWeatherByCity } from "../actions/api/weather-actions";
 
-const Index = ({ dispatch }) => {
+const Index = ({ dispatch, weatherData }) => {
 	useEffect(() => {
 		dispatch(fetchWeatherByCity("Nova Kakhovka"));
 	}, []);
