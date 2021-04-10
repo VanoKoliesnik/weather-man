@@ -1,4 +1,4 @@
-# WeatherMen :partly_sunny:
+# WeatherMan :partly_sunny:
 
 Content:
 * [How to install](#how-to-install) :arrow_down:
@@ -8,12 +8,12 @@ Content:
 
 **Clone up the repository:**
 ```bash
-git clone https://github.com/VanoKoliesnik/weather-men.git
+git clone https://github.com/VanoKoliesnik/weather-man.git
 ```
 
 **Install dependencies:**
 ```bash
-cd weather-men
+cd weather-man
 
 npm i
 ```

@@ -7,8 +7,8 @@
 		"dev": "next",
 		"build": "next build",
 		"start": "next start",
-		"prettier:check": "prettier --check {components,pages}/**",
-		"prettier:format": "prettier --write {components,pages}/**"
+		"prettier:check": "prettier --check ./**",
+		"prettier:format": "prettier --write ./**"
 	},
 	"author": "Ivan Koliesnik [kolesnikivan1002@gmail.com]",
 	"license": "ISC",

@@ -6,8 +6,7 @@ import thunk from "redux-thunk";
 import { reducer } from "./reducers/reducer";
 import { IState } from "./types";
 
-
 export const makeStore: MakeStore<IState> = (context: Context) =>
-createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+	createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export const wrapper = createWrapper<IState>(makeStore);
