@@ -6,10 +6,15 @@ import Head from "next/head";
 
 import { fetchWeatherByCity } from "../actions/api/weather-actions";
 import { IWeather, IWeatherData } from "../types";
-import getTitleIconFromCode from "../utilities/get-title-icon";
+import getEmojiFromCode from "../utilities/get-emoji-from-code";
+
+import Header from "../components/header";
+import MainInfo from "../components/main-info";
+
+type WeatherIcon = string;
 
 interface ITitleInfo {
-	icon: string;
+	icon: WeatherIcon;
 	temperature: number;
 }
 
@@ -21,6 +26,7 @@ interface IProps {
 const Index = ({ dispatch, weatherData }: IProps) => {
 	const [weather, setWeather] = useState<IWeatherData>();
 	const [titleInfo, setTitleInfo] = useState<ITitleInfo>();
+	const [weatherIcon, setWeatherIcon] = useState<WeatherIcon>();
 
 	useEffect(() => {
 		dispatch(fetchWeatherByCity("Nova Kakhovka"));
@@ -34,10 +40,13 @@ const Index = ({ dispatch, weatherData }: IProps) => {
 		if (weather) {
 			const iconCode = weather.weather[0].id;
 			const temperature = weather.main.temp;
+			const weatherIcon = getEmojiFromCode(iconCode);
+
 			setTitleInfo({
-				icon: getTitleIconFromCode(iconCode),
+				icon: weatherIcon,
 				temperature,
 			});
+			setWeatherIcon(weatherIcon);
 		}
 	}, [weather]);
 
@@ -47,14 +56,29 @@ const Index = ({ dispatch, weatherData }: IProps) => {
 				<title>
 					WeatherMan{" "}
 					{titleInfo
-						? `| ${titleInfo.icon} ${Math.round(titleInfo.temperature)} ℃`
+						? `| ${titleInfo.icon} ${titleInfo.temperature} ℃`
 						: null}
 				</title>
 			</Head>
 
-			<div>
-				{weatherData.data.map((weather) => `${weather.name} - ${weather.main.temp} ℃`)}
-			</div>
+			<main>
+				{weather ? (
+					<>
+						<Header cityName={weather.name} />
+						<MainInfo
+							icon={weatherIcon}
+							description={weather.weather[0].description}
+							temp={weather.main.temp}
+							feelsLike={weather.main.feels_like}
+							humidity={weather.main.humidity}
+							pressure={weather.main.pressure}
+							windSpeed={weather.wind.speed}
+							visibility={weather.visibility}
+							date={weather.dt}
+						/>
+					</>
+				) : null}
+			</main>
 		</>
 	);
 };

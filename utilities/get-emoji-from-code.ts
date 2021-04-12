@@ -1,4 +1,4 @@
-export default function getTitleIconFromCode(code: number) {
+export default function getEmojiFromCode(code: number) {
 	switch (true) {
 		// Thunderstorms
 		case 200 <= code && code < 300:

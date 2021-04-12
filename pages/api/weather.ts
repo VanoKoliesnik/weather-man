@@ -3,14 +3,37 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import { API_URL } from "../../utilities/constants";
 
+import { WeatherInfo } from "../../types";
+
 export default function (req: NextApiRequest, res: NextApiResponse) {
 	const cityName = req.query.city;
 	return new Promise((resolve) =>
 		axios
 			.get(`${API_URL}&q=${cityName}`)
 			.then((response) => {
-				res.status(200).json(response.data);
-				return resolve(response.data);
+				const date = new Date(response.data.dt * 1000);
+				const formattedDate = `${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`;
+
+				const data = {
+					...response.data,
+					dt: formattedDate,
+					weather: response.data.weather.map(
+						(weatherItem: WeatherInfo): WeatherInfo => ({
+							...weatherItem,
+							description:
+								weatherItem.description[0].toUpperCase() +
+								weatherItem.description.slice(1),
+						}),
+					),
+					main: {
+						...response.data.main,
+						temp: Math.round(response.data.main.temp),
+						feels_like: Math.round(response.data.main.feels_like),
+					},
+				};
+
+				res.status(200).json(data);
+				return resolve(data);
 			})
 			.catch((error) => {
 				res.status(500).json(error);

@@ -1,10 +1,16 @@
 import React from "react";
+
 import { wrapper } from "../store";
-import "normalize.css";
-import "semantic-ui-css/semantic.min.css";
+
+import GlobalStyle from "../components/global-styles";
 
 const WrappedApp = ({ Component, pageProps }) => {
-	return <Component {...pageProps} />;
+	return (
+		<>
+			<Component {...pageProps} />
+			<GlobalStyle />
+		</>
+	);
 };
 
 export default wrapper.withRedux(WrappedApp);
