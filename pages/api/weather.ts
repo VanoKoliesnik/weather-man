@@ -11,12 +11,8 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
 		axios
 			.get(`${API_URL}&q=${cityName}`)
 			.then((response) => {
-				const date = new Date(response.data.dt * 1000);
-				const formattedDate = `${date.toDateString()} ${date.getHours()}:${date.getMinutes()}`;
-
 				const data = {
 					...response.data,
-					dt: formattedDate,
 					weather: response.data.weather.map(
 						(weatherItem: WeatherInfo): WeatherInfo => ({
 							...weatherItem,

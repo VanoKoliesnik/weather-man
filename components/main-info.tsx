@@ -46,7 +46,8 @@ export default function MainInfo(props: IProps) {
 						<H1>
 							{props.icon} {props.description}
 						</H1>
-						<Description>{props.date}</Description>
+
+						<Description>{`${props.date.toDateString()} ${props.date.toLocaleTimeString()}`}</Description>
 					</div>
 
 					<div className="grid grid-rows-2 text-center">

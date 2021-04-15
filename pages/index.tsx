@@ -54,10 +54,7 @@ const Index = ({ dispatch, weatherData }: IProps) => {
 		<>
 			<Head>
 				<title>
-					WeatherMan{" "}
-					{titleInfo
-						? `| ${titleInfo.icon} ${titleInfo.temperature} ℃`
-						: null}
+					WeatherMan {titleInfo ? `| ${titleInfo.icon} ${titleInfo.temperature} ℃` : null}
 				</title>
 			</Head>
 
@@ -74,7 +71,7 @@ const Index = ({ dispatch, weatherData }: IProps) => {
 							pressure={weather.main.pressure}
 							windSpeed={weather.wind.speed}
 							visibility={weather.visibility}
-							date={weather.dt}
+							date={new Date(+weather.dt * 1000)}
 						/>
 					</>
 				) : null}
